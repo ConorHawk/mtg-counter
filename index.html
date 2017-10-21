@@ -11,22 +11,33 @@
 </head>
 <body>
 	<div id="app">
-		<button class="add-player-button" @click="addPlayer()">Add player <span class="fa fa-plus"></span></button>
-		<button class="add-player-button" @click="removePlayer()">Remove player <span class="fa fa-minus"></span></button>
-		<div class="count-container">
-			<my-component v-for="player in players"></my-component>
-		</div>
+		<template v-if="roundStarted == true">
+			<!-- <button class="add-player-button" @click="addPlayer()">Add player <span class="fa fa-plus"></span></button>
+			<button class="add-player-button" @click="removePlayer()">Remove player <span class="fa fa-minus"></span></button> -->
+			<div class="count-container">
+				<my-component :basehealth="baseHealth" v-for="player in players"></my-component>
+			</div>
+			<button @click="resetCounts();">Reset</button>
+		</template>
+		<template v-else>
+			<button @click="startGame(2,20)">Quick start</button>
+			<p>Or</p>
+			<input type="text" placeholder="Players" v-model="players">
+			<input type="text" placeholder="Life total" v-model="baseHealth">
+			<button @click="startGame(players,baseHealth)">Custom Start</button>
+		</template>
 	</div>
 	<script src="vue.js"></script>
 	<script>
 
 		var Child = {
+			props: ['basehealth'],
 		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><button @click="count = count + 5">+5</button><button @click="count++"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="count--"><span class="fa fa-minus-circle"></span></button><button @click="count = count-5">-5</span></button></div></div>',
 		  	data: function(){
 		  		return{
 		  			colors: ['red','white','green','blue','black'],
 		  			color:0,
-		  			count:20,
+		  			count: this.basehealth,
 		  		}
 		  	},
 		  	methods: {
@@ -47,22 +58,25 @@
 			  'my-component': Child
 			},
 			data: {
-				players: [],
-				templatePlayer: {
-				},
-				
+				players: 2,
+				templatePlayer: {},
+				baseHealth : 20,
+				roundStarted: false
 			},
 			methods: {
-				addPlayer: function(){
-					this.players.push(this.templatePlayer);
-				},
 				removePlayer: function(){
 					this.players.splice(-1,1);
+				},
+				startGame:function(players, lifeTotal){
+					var self = this;
+					self.roundStarted = true;
+					self.baseHealth = lifeTotal;
+					self.players = parseInt(players);
 				}
 			},
 			mounted: function(){
-				this.addPlayer();
-				this.addPlayer();
+				// this.addPlayer();
+				// this.addPlayer();
 			}
 			
 		})
