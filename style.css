@@ -3,9 +3,38 @@ body{
 	font-family: 'Roboto', sans-serif;
 }
 
+html,body, #app{
+	height:100%;
+}
+
 button:focus{
 	outline:none;
 }
+
+.start-controls{
+	text-align:center;
+	margin:40px 15px;
+}
+
+.start-controls p{
+	color:white;
+}
+
+.start-controls input{
+	display:block;
+	margin:15px auto;
+	font-size:16px;
+}
+
+button.hollow-button{
+	background: transparent;
+	color: white;
+	font-size: 16px;
+	padding: 10px 15px;
+	border: 1px solid white;
+	margin:0 auto;
+}
+
 .count-container{
 	display:flex;
 	flex-wrap:wrap;

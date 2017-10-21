@@ -17,14 +17,16 @@
 			<div class="count-container">
 				<my-component :basehealth="baseHealth" v-for="player in players"></my-component>
 			</div>
-			<button @click="resetCounts();">Reset</button>
+			<button class="hollow-button" @click="resetCounts()">Reset</button>
 		</template>
 		<template v-else>
-			<button @click="startGame(2,20)">Quick start</button>
-			<p>Or</p>
-			<input type="text" placeholder="Players" v-model="players">
-			<input type="text" placeholder="Life total" v-model="baseHealth">
-			<button @click="startGame(players,baseHealth)">Custom Start</button>
+			<div class="start-controls">
+				<button  class="hollow-button" @click="startGame(2,20)">Quick start</button>
+				<p>Or</p>
+				<input type="text" placeholder="Players" v-model="players">
+				<input type="text" placeholder="Life total" v-model="baseHealth">
+				<button class="hollow-button"  @click="startGame(players,baseHealth)">Custom Start</button>
+			</div>
 		</template>
 	</div>
 	<script src="vue.js"></script>
@@ -72,6 +74,9 @@
 					self.roundStarted = true;
 					self.baseHealth = lifeTotal;
 					self.players = parseInt(players);
+				},
+				resetCounts: function(){
+					this.roundStarted = false;
 				}
 			},
 			mounted: function(){
