@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MTG Counter</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+<body>
+	<div id="app">
+		<button class="add-player-button" @click="addPlayer()">Add player <span class="fa fa-plus"></span></button>
+		<button class="add-player-button" @click="removePlayer()">Remove player <span class="fa fa-minus"></span></button>
+		<div class="count-container">
+			<my-component v-for="player in players"></my-component>
+		</div>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+
+		var Child = {
+		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><button @click="count++"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="count--"><span class="fa fa-minus-circle"></span></button></div></div>',
+		  	data: function(){
+		  		return{
+		  			colors: ['red','white','green','blue','black'],
+		  			color:0,
+		  			count:20,
+		  		}
+		  	},
+		  	methods: {
+		  		toggleColor: function(){
+		  			if (this.color == (this.colors.length - 1)){
+		  				this.color = 0
+		  			} else {
+		  				this.color ++
+		  			}
+		  			
+		  		}
+		  	}
+		}
+
+		var app = new Vue({
+			el: '#app',
+			components: {
+			  'my-component': Child
+			},
+			data: {
+				players: [],
+				templatePlayer: {
+				},
+				
+			},
+			methods: {
+				addPlayer: function(){
+					this.players.push(this.templatePlayer);
+				},
+				removePlayer: function(){
+					this.players.splice(-1,1);
+				}
+			},
+			mounted: function(){
+				this.addPlayer();
+				this.addPlayer();
+			}
+			
+		})
+	</script>
+</body>
+</html>
