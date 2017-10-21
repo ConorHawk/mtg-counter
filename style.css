@@ -97,7 +97,7 @@ button.hollow-button{
 	background: transparent;
     border: none;
     font-size: 35px;
-    margin: 0px 15px;
+    margin: 0px 10px;
     color: white;
 }
 
@@ -160,12 +160,26 @@ button.hollow-button{
 	background-image: url("img/greenBg.jpg");
 }
 
-.two-player-duel .count-area:nth-child(1) {
+.player-duel-2 .count-area:nth-child(1) {
 	transform:rotate(180deg);
 }
 
-@media  (max-width: 767px) {
-	.count-area{
+.player-duel-4 .count-area:nth-child(1), .player-duel-4 .count-area:nth-child(2) {
+	transform:rotate(180deg);
+}
+
+
+.player-duel-4 .count-area{
+	width:49%;
+}
+
+@media  (max-width: 670px) {
+	.player-duel-4 .count-area{
 		width:100%;
 	}
+
+	.player-duel-4 .count-area:nth-child(1), .player-duel-4 .count-area:nth-child(2) {
+	transform:rotate(0deg);
 }
+}
+

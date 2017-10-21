@@ -12,7 +12,7 @@
 <body>
 	<div id="app">
 		<template v-if="roundStarted == true">
-			<div class="count-container" v-bind:class="{'two-player-duel': players==2}">
+			<div class="count-container" v-bind:class="'player-duel-'+players">
 				<my-component :basehealth="baseHealth" v-for="player in players"></my-component>
 			</div>
 			<div style="padding:15px">
