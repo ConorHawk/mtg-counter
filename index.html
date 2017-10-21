@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>MTG Counter</title>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Average|Roboto" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css?version=2">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -12,18 +12,20 @@
 <body>
 	<div id="app">
 		<template v-if="roundStarted == true">
-			<!-- <button class="add-player-button" @click="addPlayer()">Add player <span class="fa fa-plus"></span></button>
-			<button class="add-player-button" @click="removePlayer()">Remove player <span class="fa fa-minus"></span></button> -->
-			<div class="count-container">
+			<div class="count-container" v-bind:class="{'two-player-duel': players==2}">
 				<my-component :basehealth="baseHealth" v-for="player in players"></my-component>
 			</div>
-			<button class="hollow-button" @click="resetCounts()">Reset</button>
+			<div style="padding:15px">
+				<button class="hollow-button" @click="resetCounts()">Reset</button>
+			</div>
 		</template>
 		<template v-else>
 			<div class="start-controls">
 				<button  class="hollow-button" @click="startGame(2,20)">Quick start</button>
 				<p>Or</p>
+				<label for="">Players</label>
 				<input type="number" placeholder="Players" v-model="players">
+				<label for="">Health</label>
 				<input type="number" placeholder="Life total" v-model="baseHealth">
 				<button class="hollow-button"  @click="startGame(players,baseHealth)">Custom Start</button>
 			</div>
