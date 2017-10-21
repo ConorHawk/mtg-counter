@@ -23,8 +23,8 @@
 			<div class="start-controls">
 				<button  class="hollow-button" @click="startGame(2,20)">Quick start</button>
 				<p>Or</p>
-				<input type="text" placeholder="Players" v-model="players">
-				<input type="text" placeholder="Life total" v-model="baseHealth">
+				<input type="number" placeholder="Players" v-model="players">
+				<input type="number" placeholder="Life total" v-model="baseHealth">
 				<button class="hollow-button"  @click="startGame(players,baseHealth)">Custom Start</button>
 			</div>
 		</template>
