@@ -21,7 +21,7 @@
 	<script>
 
 		var Child = {
-		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><button @click="count++"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="count--"><span class="fa fa-minus-circle"></span></button></div></div>',
+		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><button @click="count = count + 5">+5</button><button @click="count++"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="count--"><span class="fa fa-minus-circle"></span></button><button @click="count = count-5">-5</span></button></div></div>',
 		  	data: function(){
 		  		return{
 		  			colors: ['red','white','green','blue','black'],
