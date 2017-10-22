@@ -36,12 +36,15 @@
 
 		var Child = {
 			props: ['basehealth'],
-		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><button @click="count = count + 5">+5</button><button @click="count++"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="count--"><span class="fa fa-minus-circle"></span></button><button @click="count = count-5">-5</span></button></div></div>',
+		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><div v-bind:style="{width:barWidth[0]+\'%\'}" class="life-bar"></div><div v-bind:style="{width:barWidth[1]+\'%\'}" class="over life-bar"></div><button @click="changeLife(5)">+5</button><button @click="changeLife(1)"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="changeLife(-1)"><span class="fa fa-minus-circle"></span></button><button @click="changeLife(-5)">-5</span></button></div></div>',
 		  	data: function(){
 		  		return{
 		  			colors: ['red','white','green','blue','black'],
 		  			color:0,
 		  			count: this.basehealth,
+		  			baseHealth: this.basehealth,
+		  			sound: new Audio('sounds/beep.wav')
+
 		  		}
 		  	},
 		  	methods: {
@@ -51,7 +54,46 @@
 		  			} else {
 		  				this.color ++
 		  			}
+		  		},
+		  		changeLife: function(number){
+		  			this.count = this.count + number;
+		  			this.playSound();
+		  			// if (-5 < number < 5){
+		  			// 	this.playSound();
+		  			// } else {
+		  			// 	this.playLoudSound();
+		  			// }
 		  			
+		  		},
+		  		playSound: function(){
+		  			this.sound =  new Audio('sounds/beep.wav');
+		  			this.sound.play();
+		  		},
+		  		// playLoudSound: function(){
+
+		  		// }
+		  	},
+		  	computed: {
+		  		barWidth: function(){
+
+		  			var currentCount = this.count;
+		  			var baseHealth = this.baseHealth;
+
+		  			var percentsToReturn = [];
+
+		  			percentsToReturn[0] = (currentCount/baseHealth) * 100;
+
+		  			percentsToReturn[1] = percentsToReturn[0] - 100;
+
+		  			if (percentsToReturn[0] > 100){
+		  				percentsToReturn[0] = 100;
+		  			} else {
+		  				percentsToReturn[1] = 0;
+		  			}
+
+		  			console.log(percentsToReturn)
+
+		  			return percentsToReturn;
 		  		}
 		  	}
 		}
