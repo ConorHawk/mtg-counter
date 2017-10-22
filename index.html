@@ -32,6 +32,10 @@
 			</div>
 		</template>
 	</div>
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 	<script src="vue.js"></script>
 	<script>
 
@@ -114,7 +118,8 @@
 				templatePlayer: {},
 				baseHealth : 20,
 				roundStarted: false,
-				audioOn: true
+				audioOn: true,
+				searchResult: ''
 			},
 			methods: {
 				removePlayer: function(){
@@ -123,7 +128,7 @@
 				startGame:function(players, lifeTotal){
 					var self = this;
 					self.roundStarted = true;
-					self.baseHealth = lifeTotal;
+					self.baseHealth = parseInt(lifeTotal);
 					self.players = parseInt(players);
 				},
 				resetCounts: function(){
@@ -131,8 +136,17 @@
 				}
 			},
 			mounted: function(){
+				var self = this;
 				// this.addPlayer();
 				// this.addPlayer();
+				$.ajax({
+					dataType: "json",
+					url: 'https://api.magicthegathering.io/v1/cards?type=legendary',
+					success: function(response){
+						self.searchResult = response;
+						console.log(self.searchResult)
+					}
+				});
 			}
 			
 		})
