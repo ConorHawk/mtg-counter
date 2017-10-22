@@ -84,11 +84,11 @@ button.hollow-button{
 .count-controllers {
 	display:flex;
 	justify-content: center;
-	padding: 20px;
+	/*padding: 20px;*/
 }
 
 .count-controllers h2 {
-	font-size:60px;
+	font-size:40px;
 	margin:0px;
 
 }
@@ -111,13 +111,13 @@ button.hollow-button{
 }
 
 .count-area .count-banner .toggle-color-button{
-	font-size: 25px;
-	background-color: rgba(255,255,255,0.5);
-	border: none;
-	width: 40px;
-	height: 40px;
-	border-radius: 60px;
-	margin: 10px;
+	font-size: 10px;
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 60px;
+    margin: 5px;
 }
 
 .count-area.red{
@@ -169,14 +169,14 @@ button.hollow-button{
 }
 
 
-.player-duel-4 .count-area{
+.player-duel-4 .count-area, .player-duel-5 .count-area{
 	width:49%;
 }
 
 @media  (max-width: 670px) {
-	.player-duel-4 .count-area{
+/*	.player-duel-4 .count-area{
 		width:100%;
-	}
+	}*/
 
 	.player-duel-4 .count-area:nth-child(1), .player-duel-4 .count-area:nth-child(2) {
 	transform:rotate(0deg);
