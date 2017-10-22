@@ -13,10 +13,11 @@
 	<div id="app">
 		<template v-if="roundStarted == true">
 			<div class="count-container" v-bind:class="'player-duel-'+players">
-				<my-component :basehealth="baseHealth" v-for="player in players"></my-component>
+				<my-component :audio="audioOn" :basehealth="baseHealth" v-for="player in players"></my-component>
 			</div>
 			<div style="padding:15px">
 				<button class="hollow-button" @click="resetCounts()">Reset</button>
+				<button class="audio-button" @click="audioOn = !audioOn"><span v-if="audioOn" class="fa fa-volume-up"></span><span v-else class="fa fa-volume-off"></span></button>
 			</div>
 		</template>
 		<template v-else>
@@ -35,7 +36,7 @@
 	<script>
 
 		var Child = {
-			props: ['basehealth'],
+			props: ['basehealth','audio'],
 		  	template: '<div class="count-area" v-bind:class="colors[color]"><div class="count-banner"><button class="toggle-color-button" @click="toggleColor"><span class="fa fa-refresh"></span></button></div><div class="count-controllers"><div v-bind:style="{width:barWidth[0]+\'%\'}" class="life-bar"></div><div v-bind:style="{width:barWidth[1]+\'%\'}" class="over life-bar"></div><button @click="changeLife(5)">+5</button><button @click="changeLife(1)"><span class="fa fa-plus-circle"></span></button><h2>{{count}}</h2><button @click="changeLife(-1)"><span class="fa fa-minus-circle"></span></button><button @click="changeLife(-5)">-5</span></button></div></div>',
 		  	data: function(){
 		  		return{
@@ -43,7 +44,8 @@
 		  			color:0,
 		  			count: this.basehealth,
 		  			baseHealth: this.basehealth,
-		  			sound: new Audio('sounds/beep.wav')
+		  			sound: new Audio('sounds/beep.wav'),
+		  			audioEnabled : this.audio
 
 		  		}
 		  	},
@@ -66,8 +68,12 @@
 		  			
 		  		},
 		  		playSound: function(){
-		  			this.sound =  new Audio('sounds/beep.wav');
-		  			this.sound.play();
+		  			var self = this;
+		  			console.log(self.$parent.audioOn)
+		  			if (self.$parent.audioOn){
+			  			self.sound =  new Audio('sounds/beep.wav');
+			  			self.sound.play();
+		  			}
 		  		},
 		  		// playLoudSound: function(){
 
@@ -107,7 +113,8 @@
 				players: 2,
 				templatePlayer: {},
 				baseHealth : 20,
-				roundStarted: false
+				roundStarted: false,
+				audioOn: true
 			},
 			methods: {
 				removePlayer: function(){
